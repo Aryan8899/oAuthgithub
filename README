@@ -1,0 +1,6 @@
+## Environment Setup
+Create a `.env` file in the root directory with the following structure:
+
+- CLIENT_ID= ##provide id
+- CLIENT_SECRET= ##provide secret key
+- GITHUB_ACCESS_TOKEN=  # 
