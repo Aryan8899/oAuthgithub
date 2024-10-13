@@ -78,4 +78,4 @@ When the PR is raised, the system will automatically generate a review using the
 4) The AI processes the PR changes and posts a review comment on GitHub.
 
 ##  Project Demo
-Here is a screen recording ![Project Demo](video/assignmentgit.mp4). showing the flow from creating the PR to the AI posting a comment.
+ Here is a screen recording: [Watch the Project Demo](./video/assignmentgit.mp4). showing the flow from creating the PR to the AI posting a comment.
