@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Automatic GitHub PR Review System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an automatic GitHub Pull Request (PR) review system that leverages GitHub's API, OAuth authentication, webhooks, and AI to review PRs automatically. When a new PR is created, the system reviews the changes using an AI model and posts the review as a comment on the PR.
 
-## Available Scripts
+## Features
+- OAuth-based GitHub Authentication to obtain an access token.
+- Automatic webhook creation for GitHub repositories.
+- Automatically triggered AI review on new pull requests.
+- Comments are posted directly on the PR with the AI-generated review.
+  
+## Tech Stack
+- **Frontend:** React (or other framework) for the UI to handle GitHub OAuth.
+- **Backend:** Node.js/Express (or another backend framework) to handle OAuth, webhooks, and GitHub API calls.
+- **AI Model:** Any AI model or API (OpenAI GPT, custom model, etc.) for reviewing PRs.
+- **GitHub API:** Used for OAuth, Webhooks, and posting comments on pull requests.
 
-In the project directory, you can run:
+## Requirements
+- Node.js
+- A GitHub account with access to the repository you want to integrate.
+- Ngrok (or any other tunneling service) to create a public URL for local development.
+- Postman or cURL to test API endpoints (optional).
+  
+## Setup Instructions
 
-### `npm start`
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/automatic-pr-review.git
+cd automatic-pr-review
+```
+### 2. Install Dependencies
+For both the backend and frontend:
+```bash
+npm install
+```
+### 3. Start the Frontend App
+```bash
+npm start
+```
+### 4. change directory for backend code - (Configure Environment Variables)
+Create a `env`file in the backend directory with the following details:
+```bash
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
+GITHUB_REDIRECT_URI=http://localhost:3000/auth/github/callback
+WEBHOOK_CALLBACK_URL=https://your-ngrok-url/webhook
+GITHUB_ACESS_TOKEN=your-githubacesstoken
+```
+### 5. Start the Backend Server
+Make sure your backend server is running:
+```bash
+node index.js
+```
+### 6. Create Webhook for the Repository
+Send a POST request to create a webhook for your GitHub repository.
+Example Request:
+```bash
+POST /create-webhook
+{
+  "repo": "your-repo-name",
+  "owner": "your-github-username",
+  "callbackUrl": "https://your-ngrok-url/webhook"
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 7. Create a New Branch and Pull Request
+- Create a new branch in the repository.
+- Make changes and open a pull request.
+- The webhook will trigger the AI-based PR review, and a comment will be automatically posted.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 8. AI Review
+When the PR is raised, the system will automatically generate a review using the AI model and post it as a comment on the pull request.
 
-### `npm test`
+## Example Flow
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1) User connects their GitHub account using OAuth.
+2) A webhook is created for the repository using the backend API.
+2) A pull request is opened, triggering the webhook.
+4) The AI processes the PR changes and posts a review comment on GitHub.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##  Project Demo
+Here is a screen recording ![Project Demo](video/assignmentgit.mp4). showing the flow from creating the PR to the AI posting a comment.
