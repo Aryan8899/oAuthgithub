@@ -1,0 +1,24 @@
+{
+  "name": "github",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "tunnel": "node tunnel.js",
+    "lt": "node localtunnel.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "ngrok": "^5.0.0-beta.2"
+  },
+  "devDependencies": {
+    "localtunnel": "^2.0.2"
+  }
+}
